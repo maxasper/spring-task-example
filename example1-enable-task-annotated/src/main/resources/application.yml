@@ -2,7 +2,7 @@
 spring:
   application.name: task-example
   cloud.task:
-    single-instance-enabled: true # only one task with a given task name can be run at a time. Default is false.
+    single-instance-enabled: false # only one task with a given task name can be run at a time. Default is false.
     external-execution-id: external-execution-id # External execution id for the task. Default is executionId.
     parent-execution-id: 12345 # Parent execution id for the task. Default is executionId.
     closecontextEnabled: true # Enable/Disable close context on task execution. Default is true.
