@@ -56,6 +56,10 @@ public class CustomJob {
         return runJob(buildJob4Async());
     }
 
+    public ExitStatus runJob5() {
+        return runJob(buildJob5SimpleWithListener());
+    }
+
 
     private ExitStatus runJob(Job job) {
         try {
@@ -115,9 +119,28 @@ public class CustomJob {
                 .build();
     }
 
+    public Job buildJob5SimpleWithListener() {
+        return new JobBuilder("job-" + UUID.randomUUID(), jobRepository)
+                .start(tasklet1Step1())
+                .next(tasklet1Step2())
+                .next(tasklet4Step1())
+                .next(tasklet2Step3())
+                .listener(new CustomJobListener())
+                .listener(new CustomJobListenerAnnotated())
+                .build();
+    }
+
     public Step buildStep(CustomStepParameters config) {
         return new StepBuilder(config.name(), jobRepository)
                 .tasklet(buildTasklet(config), transactionManager)
+                .build();
+    }
+
+    public Step buildStepWithListener(CustomStepParameters config) {
+        return new StepBuilder(config.name(), jobRepository)
+                .tasklet(buildTasklet(config), transactionManager)
+                .listener(new CustomStepListener())
+                .listener(new CustomStepListenerAnnotated())
                 .build();
     }
 
@@ -154,6 +177,14 @@ public class CustomJob {
                 .name("tasklet3Step4")
                 .taskletType("t3")
                 .customTaskletParameters(CustomTaskletParameters.builder().params(Map.of("p4", "v4")).build())
+                .build());
+    }
+
+    private Step tasklet4Step1() {
+        return buildStepWithListener(CustomStepParameters.builder()
+                .name("tasklet4Step1")
+                .taskletType("t2")
+                .customTaskletParameters(CustomTaskletParameters.builder().params(Map.of("p7", "v7")).build())
                 .build());
     }
 

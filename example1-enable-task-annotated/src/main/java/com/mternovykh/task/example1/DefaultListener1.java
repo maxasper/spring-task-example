@@ -6,7 +6,6 @@ import org.springframework.cloud.task.repository.TaskExecution;
 public class DefaultListener1 implements TaskExecutionListener {
     @Override
     public void onTaskStartup(TaskExecution taskExecution) {
-        taskExecution.setExitMessage("some exit message");
         System.out.printf("DefaultListener1. Task started: %s\n", taskExecution.getTaskName());
     }
 

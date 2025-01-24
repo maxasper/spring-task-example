@@ -32,4 +32,9 @@ public class DefaultController {
     public ResponseEntity<ExitStatus> runCustomJob4() {
         return ResponseEntity.ok(customJob.runJob4());
     }
+
+    @PostMapping("run-custom-job-5")
+    public ResponseEntity<ExitStatus> runCustomJob5() {
+        return ResponseEntity.ok(customJob.runJob5());
+    }
 }

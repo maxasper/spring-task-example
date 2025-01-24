@@ -1,4 +1,3 @@
-# TaskLifecycleListener is responsible for the task execution.
 spring:
   application.name: batch-example
 #  batch.initialize-schema: always
