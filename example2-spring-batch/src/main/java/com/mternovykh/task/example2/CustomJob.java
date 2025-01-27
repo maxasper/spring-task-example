@@ -197,7 +197,7 @@ public class CustomJob {
     }
 
     private Step taskletWithExceptionStep5() {
-        return buildStep(CustomStepParameters.builder()
+        return buildStepWithListener(CustomStepParameters.builder()
                 .name("taskletWithExceptionStep5")
                 .taskletType("t-ex")
                 .customTaskletParameters(CustomTaskletParameters.builder().params(Map.of("p5", "v5")).build())
